@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>623319251212-r93bfm7nl536r02vh7u3gv1mpmb32e6s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.623319251212-r93bfm7nl536r02vh7u3gv1mpmb32e6s</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBHg9Zh0t42oKHwTgyZKUrNQvlxq5R2mv8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>623319251212</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.pluto.sharecar.sharedCar.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>shared-car-546e2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shared-car-546e2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:623319251212:ios:4f69a83c90d3b7fd6c7129</string>
+</dict>
+</plist>

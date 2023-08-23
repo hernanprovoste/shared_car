@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "623319251212",
+    "project_id": "shared-car-546e2",
+    "storage_bucket": "shared-car-546e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623319251212:android:9c8fbcbbf76a57986c7129",
+        "android_client_info": {
+          "package_name": "com.pluto.sharecar.shared_car"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623319251212-voqah55oo2qnmjnf9mao97ok07sro6jd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF6M8PPpI7WArxzfUcpKeBHGrvE-80j9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623319251212-voqah55oo2qnmjnf9mao97ok07sro6jd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,8 +11,21 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+
+  bool showLoginPage = true;
+
+  void toogleScreens() {
+    setState(() {
+      showLoginPage = !showLoginPage;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const SignInScreen();
+    if (showLoginPage) {
+      return const SignInScreen();
+    } else {
+      return const SignUpScreen();
+    }
   }
 }

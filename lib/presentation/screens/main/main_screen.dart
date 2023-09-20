@@ -12,9 +12,9 @@ class MainScreen extends StatelessWidget {
       body: StreamBuilder<User?>(stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if(snapshot.hasData) {
-          return const HomeScreen();
+          return const UserMainPageScreen();
         } else {
-          return const SignInScreen();
+          return const AuthScreen();
         }
       },),
     );

@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_car/domain/global.dart';
 import 'package:shared_car/presentation/widgets/custom_button.dart';
 import 'package:shared_car/presentation/widgets/custom_text_field.dart';
 
@@ -20,8 +22,16 @@ class _SignInScreenState extends State<SignInScreen> {
   final _passwordController = TextEditingController();
 
   Future signIn() async {
-    var response = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text.trim());
-    print(response);
+    // var response = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text.trim());
+    // print(response);
+    await firebaseAuth.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text.trim()).then((auth) async {
+      currentUser = auth.user;
+
+      await Fluttertoast.showToast(msg: "Login Correcto");
+      context.go('/main');
+    }).catchError((errorMessage) {
+      Fluttertoast.showToast(msg: 'Ha ocurrido un error $errorMessage');
+    });
   }
 
   @override

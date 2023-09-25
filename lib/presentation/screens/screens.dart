@@ -7,5 +7,6 @@ export 'package:shared_car/presentation/screens/user_main_page/user_main_page.da
 export 'package:shared_car/presentation/screens/find_cars/find_cars.dart';
 export 'package:shared_car/presentation/screens/map/client_map_screen.dart';
 export 'package:shared_car/presentation/screens/driver/driver_screen.dart';
+export 'package:shared_car/presentation/screens/splash/splash_screen.dart';
 
 

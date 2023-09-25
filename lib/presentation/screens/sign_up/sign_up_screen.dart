@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_car/domain/global.dart';
 import 'package:shared_car/presentation/widgets/custom_button.dart';
 import 'package:shared_car/presentation/widgets/custom_text_field.dart';
+import 'package:shared_car/presentation/widgets/custom_text_form_field.dart';
 
 const List<String> list = <String>['Conductor', 'Pasajero'];
 
@@ -40,7 +44,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
     //       'rut': _rutController.text.trim(),
     //       'profile': _selectedController.text.trim()
     //     });
-    context.go('/driverScreen');
+    // context.go('/main');
+
+    // if(_formKey.currentState!.validate()) {
+    //   print(_formKey.currentState);
+      await firebaseAuth.createUserWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text.trim()).then((auth) async {
+        currentUser = auth.user;
+
+        if (currentUser != null) {
+          Map<String, dynamic> userMap = {
+            'id': currentUser!.uid,
+            'name': _firstNameController.text.trim(),
+            'lastName': _lastNameController.text.trim(),
+            'address': _addressController.text.trim(),
+            'rut': _rutController.text.trim(),
+          };
+
+          // FirebaseFirestore.instance.collection('users').doc(currentUser!.uid).set(userMap);
+          DatabaseReference userRef = FirebaseDatabase.instance.ref().child("users");
+          userRef.child(currentUser!.uid).set(userMap);
+        }
+
+        await Fluttertoast.showToast(msg: "Registro Completado");
+        context.go('/main');
+      }).catchError((errorMessage) {
+        Fluttertoast.showToast(msg: 'Ha ocurrido un error $errorMessage');
+      });
+    // } else {
+    //   Fluttertoast.showToast(msg: 'Los campos no estan completados');
+    // }
   }
 
   @override
@@ -55,6 +87,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
+  // Declare a global key for form
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +111,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 50,
                   ),
+                  // Form(child: Column(
+                  //   key: _formKey,
+                  //   children: [
+                  //     CustomTextFormField(hintText: "Rut", controller: _rutController,),
+                  //     const SizedBox(height: 10,),
+                  //     CustomTextFormField(hintText: "Nombre", controller: _firstNameController,),
+                  //     const SizedBox(height: 10,),
+                  //     CustomTextFormField(hintText: "Apellido", controller: _lastNameController,),
+                  //     const SizedBox(height: 10,),
+                  //     CustomTextFormField(hintText: "Email", controller: _emailController,),
+                  //     const SizedBox(height: 10,),
+                  //     CustomTextFormField(hintText: "Password", controller: _passwordController, obscureText: true,),
+                  //     const SizedBox(height: 10,),
+                  //     CustomTextFormField(hintText: "Confirmar Password", controller: _confirmPasswordController, obscureText: true,),
+                  //     // DropdownMenu<String>(
+                  //     //   initialSelection: list.first,
+                  //     //   controller: _selectedController,
+                  //     //   onSelected: (String? value) {
+                  //     //     // This is called when the user selects an item.
+                  //     //     setState(() {
+                  //     //       dropdownValue = value!;
+                  //     //     });
+                  //     //   },
+                  //     //   dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+                  //     //     return DropdownMenuEntry<String>(value: value, label: value);
+                  //     //   }).toList(),
+                  //     // ),
+                  //     const SizedBox(
+                  //       height: 10,
+                  //     ),
+                  //
+                  //     //   Sign in Button
+                  //
+                  //     CustomButton(onTap: signUp, nameButton: 'Registrate'),
+                  //
+                  //     const SizedBox(
+                  //       height: 25,
+                  //     ),
+                  //   ],
+                  // )),
                   CustomTextField(hintText: "Rut", controller: _rutController,),
                   const SizedBox(
                     height: 10,
@@ -89,10 +163,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomTextField(hintText: "Direccion", controller: _addressController,),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  // CustomTextField(hintText: "Direccion", controller: _addressController,),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
 
                   //   Email Textfield
                   CustomTextField(hintText: "Email", controller: _emailController,),
@@ -112,30 +186,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 10,
                   ),
 
-              DropdownMenu<String>(
-                initialSelection: list.first,
-                controller: _selectedController,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue = value!;
-                  });
-                },
-                dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
-              ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  // Sign in Button
 
-                  //   Sign in Button
+                      CustomButton(onTap: signUp, nameButton: 'Registrate'),
 
-                  CustomButton(onTap: signUp, nameButton: 'Registrate'),
-
-                  const SizedBox(
-                    height: 25,
-                  ),
+                      const SizedBox(
+                        height: 25,
+                      ),
 
                   //   Register Button
                   Row(
